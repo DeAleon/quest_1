@@ -113,7 +113,7 @@ class UserManager(User, Profile):
             for line in file:
                 name, surname, email, password, login, age, gender, home, phone = line.split(' ')
                 if email == search_email:
-                    print(f'{self.name} {self.surname} {self.email} {self.age} {self.gender} {self.home} {self.phone}')
+                    print(f'{name} {surname} {email} {age} {gender} {home} {phone}')
 
     def list_user(self):
         list_user = []
