@@ -85,7 +85,6 @@ class UserManager(User, Profile):
             print(f'Пользователь: {self.email} уже зарегестрирован')
             return count
 
-
     def add_user(self):
         with open(self.data, 'r+', encoding='utf-8') as file:
             if os.stat("data.txt").st_size == 0:
@@ -109,8 +108,27 @@ class UserManager(User, Profile):
                                             f'{self.age} {self.gender} {self.home} {self.phone}'):
                         f.write(line)
 
+    def search_user(self, search_email):
+        with open(self.data, 'r+', encoding='utf-8') as file:
+            for line in file:
+                name, surname, email, password, login, age, gender, home, phone = line.split(' ')
+                if email == search_email:
+                    print(f'{self.name} {self.surname} {self.email} {self.age} {self.gender} {self.home} {self.phone}')
+
+    def list_user(self):
+        list_user = []
+        with open(self.data, 'r+', encoding='utf-8') as file:
+            for line in file:
+                name, surname, email, password, login, age, gender, home, phone = line.split(' ')
+                list_user.append(email)
+        print(list_user)
 
 
 den = UserManager('1234', '12342', 'qwe3@mail.ru', 123, 1113, 13,
                   3, 1113, 123123)
+user = UserManager('oleg', 'Nikitinskiy', 'donnotel@mail.ru', 12345678, 'DeAleon',
+                   27, 'men', 'goodhome', 88005553535)
+user.add_user()
 den.del_user()
+den.search_user('donnotel@mail.ru')
+den.list_user()
