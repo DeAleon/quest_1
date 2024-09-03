@@ -85,6 +85,7 @@ class UserManager(User, Profile):
             print(f'Пользователь: {self.email} уже зарегестрирован')
             return count
 
+
     def add_user(self):
         with open(self.data, 'r+', encoding='utf-8') as file:
             if os.stat("data.txt").st_size == 0:
@@ -100,7 +101,16 @@ class UserManager(User, Profile):
 
     def del_user(self):
 
+        with open(self.data, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            with open(self.data, 'w', encoding='utf-8') as f:
+                for line in lines:
+                    if line.strip("\n") != (f'{self.name} {self.surname} {self.email} {self.password} {self.login} '
+                                            f'{self.age} {self.gender} {self.home} {self.phone}'):
+                        f.write(line)
+
+
 
 den = UserManager('1234', '12342', 'qwe3@mail.ru', 123, 1113, 13,
                   3, 1113, 123123)
-den.add_user()
+den.del_user()
